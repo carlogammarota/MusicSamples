@@ -1,0 +1,52 @@
+{
+  "name": "vue-firebase-login",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "start": "serve -s dist"
+  },
+  "dependencies": {
+    "bootstrap-vue": "2.0.0-rc.22",
+    "element-ui": "2.9.1",
+    "express": "4.17.1",
+    "firebase": "6.1.1",
+    "firebaseui": "4.0.0",
+    "npm": "6.9.0",
+    "router": "latest",
+    "socket.io": "2.2.0",
+    "vue": "^2.5.22",
+    "vue-router": "3.0.6",
+    "vue-socket.io": "3.0.7"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "3.6.0",
+    "@vue/cli-plugin-eslint": "3.6.0",
+    "@vue/cli-service": "3.6.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.5.21"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": ["plugin:vue/essential", "eslint:recommended"],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"],
+  "keywords": ["firebase", "bootstrap", "router", "vue", "element"],
+  "description": null
+}
