@@ -1,6 +1,7 @@
 <template>
   <div>
     <!-- <input type="file" @change="uploadFile($event)"> -->
+    <h3>Upload Sample</h3>
     <br>
     {{CalcularPorcentajeDeCarga}}
     <br>
@@ -17,6 +18,8 @@
 <script>
 import firebase from "firebase";
 //Componente que sube la imagen
+import { mapState, mapGetters, mapActions } from "vuex";
+import store from "@/store/index";
 export default {
   data() {
     return {
@@ -78,11 +81,14 @@ export default {
           },
           sus => {
             console.log("sussess", sus);
+           
             this.spinner = false;
 
             uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
               this.UrlDownload = downloadURL;
               this.EscribirDatos();
+              // console.log("store dispatch")
+              this.$store.dispatch('database/getSamplesAction')
               console.log("File available at", downloadURL);
               this.spinner = false;
             });
