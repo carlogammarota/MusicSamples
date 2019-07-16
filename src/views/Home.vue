@@ -1,6 +1,7 @@
 <template>
   <div>
     <NavBar></NavBar>
+    <Header></Header>
     <Search></Search>
     <p>This is at home!</p>
     <!-- <ListFirebaseStorage></ListFirebaseStorage> -->
@@ -16,6 +17,7 @@ import ReadFilesDatabase from "../components/ReadFilesDatabase.vue";
 import UploadDatabase from "../components/UploadDatabase.vue";
 import tableFiles from "../components/TableFiles.vue";
 import NavBar from "../components/NavBar.vue";
+import Header from "../components/Header.vue";
 import Search from "../components/Search.vue";
 import store from "@/store/index";
 import { mapState, mapGetters } from "vuex";
@@ -27,7 +29,8 @@ export default {
     UploadDatabase,
     tableFiles,
     NavBar,
-    Search
+    Search,
+    Header
   },
   data() {
     return {

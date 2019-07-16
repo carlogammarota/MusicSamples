@@ -8,7 +8,10 @@
     </ul>-->
     <!-- "getNombre:" {{getSamples}}
     {{getNombre}} -->
+     Favorites: {{getFavorites}}
     <button @click="LeerDatos()">LeerDatos</button>
+
+
     <b-table striped hover :items="getSamples">
       <template slot="UrlDownload" slot-scope="data">
         <!-- <audio controls>
@@ -24,18 +27,24 @@
 
         
       </template>
-      <template slot="asd" slot-scope="data">
+      <template slot="Actions" slot-scope="data">
         <!-- <audio controls>
           <source :src="data.item.UrlDownload">  
         </audio> -->
 
         <!-- audio element -->
-        <vue-plyr>
+        <!-- <vue-plyr>
           <audio>
             <source :src="data.item.UrlDownload" type="audio/mp3"/>
           </audio>
-        </vue-plyr>
-
+        </vue-plyr> -->
+        <b-btn @click="addFavorites(data.item)" download class="actions" variant="primary" >
+          <star-circle></star-circle>
+        </b-btn> -
+        <b-btn @click="data.item.UrlDownload" download variant="success" class="actions">
+          <downloadIcon />
+        </b-btn>
+        <!-- <i class="fas fa-arrow-circle-down"></i> -->
         
       </template>
     </b-table>
@@ -44,17 +53,21 @@
 </template>
 <script>
 import firebase from "firebase";
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapMutations } from "vuex";
 import store from "@/store/index";
+import JSZip from 'jszip' 
+import { saveAs } from 'file-saver';
 export default {
   name: "tableFiles",
+  components:{
+  },
   data() {
     return {
-     
       obj: {},
       nombre: "",
       linkDownload: "",
-      carpeta: ""
+      carpeta: "",
+      toastCount: 0
     };
   },
   firebase() {
@@ -68,6 +81,52 @@ export default {
     }
   },
   methods: {
+    makeToast(message, obj ,append = false) {
+        this.toastCount++
+        this.$bvToast.toast(`Sample ${obj.nombre} agregado a Favoritos correctamente`, {
+          title: 'Add to Favorites',
+          autoHideDelay: 2000,
+          appendToast: append
+        })
+    },
+    addFavorites(obj){
+      
+      // var zip = new JSZip();
+      // zip.file(obj.nombre, obj.UrlDownload);
+      // var file = new File(obj.nombre, {type: "audio/mp3"});
+      // zip.file("Hello.txt", "Hello World\n");
+      // // var img = zip.folder("images");
+      // // img.file("smile.gif", {base64: true});
+
+      // saveAs(obj.UrlDownload, obj.nombre);
+
+      // zip.generateAsync({type:"blob"})
+      // .then(function (blob) {
+      //     saveAs(obj.nombre, obj.UrlDownload, "hello.zip");
+      // });
+      // zip.generateAsync({type:"blob"})
+      // .then(function(content) {
+      //     // see FileSaver.js
+      //     saveAs(content, "example.zip");
+      //     zip.file("audio.mp3", {binary:true});
+      // });
+
+      // zip.getBinaryContent(obj.UrlDownload, function (err, data) {
+      //     if(err) {
+      //     throw err; // or handle the error
+      //     }
+      //     var zip = new JSZip();
+          
+      //     zip.file("audio.mp3", data, {binary:true});
+
+      // });
+
+
+      this.makeToast("message", obj)
+      console.log("obj", obj)
+      this.$store.commit("favorites/addFavorites", obj)
+
+    },
     boton() {},
     // EscribirDatos() {
     //   var ref = firebase.database().ref("test2");
@@ -105,9 +164,15 @@ export default {
     // this.items.push({"asd":13})
     this.$store.dispatch('database/getSamplesAction')
     // this.$store.commit('database/getSamples')
+    // this.getSamples.update({
+    //       nombre: "this.NombreDelArchivo",
+    //       carpeta: "this.Carpeta",
+    //       UrlDownload: "this.UrlDownload"
+    //     })
+        
   },
   computed: {
-    ...mapGetters({getNombre: "database/getNombre", getSamples: "database/getSamples"})
+    ...mapGetters({getNombre: "database/getNombre", getSamples: "database/getSamples", getFavorites: "favorites/getFavorites"})
   }
 };
 </script>
@@ -115,5 +180,12 @@ export default {
 <style>
   .plyr--audio .plyr__controls{
     background-color: none !important
+  }
+  .actions{
+    font-size: 5px;
+  }
+
+  star-circle downloadIcon {
+    font-size: 10px;
   }
 </style>

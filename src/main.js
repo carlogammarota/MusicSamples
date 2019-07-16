@@ -17,6 +17,14 @@ import BootstrapVue from "bootstrap-vue";
 import VuePlyr from 'vue-plyr'
 import 'vue-plyr/dist/vue-plyr.css' // only if your build system can import css, otherwise import it wherever you would import your css.
 
+import downloadIcon from "vue-material-design-icons/Download.vue"
+import starCircleIcon from "vue-material-design-icons/StarCircle.vue"
+Vue.component("downloadIcon", downloadIcon)
+Vue.component("star-circle", starCircleIcon)
+
+
+
+
 Vue.use(VuePlyr)
 
 //player

@@ -8,10 +8,26 @@ export default {
     },
     getters: {
         getNombre(state){
+            
             return state.nombre
         },
         getSamples(state){
-            return state.samples
+            
+            // return state.samples
+            let Array = []
+            // Array.concat("test")
+            console.log("array", Array.concat(state.samples))
+            console.log("array sin concat", state.samples)
+            Array.push({nombre: 420, carpeta: "Music", UrlDownload: "tres", Actions: ""})
+            return Array.concat(state.samples)
+            // return state.samples
+            // return obligacionesFueraDeTermino.concat(arrayOrdenado)
+
+            // {
+                //       nombre: "this.NombreDelArchivo",
+                //       carpeta: "this.Carpeta",
+                //       UrlDownload: "this.UrlDownload"
+                //     }
         }
     },
     mutations: {
