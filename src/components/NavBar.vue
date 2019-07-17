@@ -5,7 +5,7 @@
                 <!-- MODAL START -->
 
                 <b-modal id="modal-1" title="Favorites">
-                    <p class="my-4">Hello from modal!</p>
+                    <p class="my-4">Hello from modall!</p>
                     {{getFavorites.nombre}}
                     <b-table striped hover :items="getFavorites">
                             <template slot="UrlDownload" slot-scope="data">
