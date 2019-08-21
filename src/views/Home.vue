@@ -2,12 +2,13 @@
   <div>
     <NavBar></NavBar>
     <Header></Header>
+    <UploadDatabase></UploadDatabase>
     <tags></tags>
      
     <!-- <Search></Search> -->
     <!-- <ListFirebaseStorage></ListFirebaseStorage> -->
     <!-- <ReadFilesDatabase></ReadFilesDatabase> -->
-    <!-- <UploadDatabase></UploadDatabase> -->
+    
     <!-- <tableFiles></tableFiles> -->
     <tableBuefy></tableBuefy>
    
