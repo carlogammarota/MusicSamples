@@ -2,12 +2,15 @@
   <div>
     <NavBar></NavBar>
     <Header></Header>
-    <Search></Search>
-    <p>This is at home!</p>
+    <tags></tags>
+     
+    <!-- <Search></Search> -->
     <!-- <ListFirebaseStorage></ListFirebaseStorage> -->
     <!-- <ReadFilesDatabase></ReadFilesDatabase> -->
-    <UploadDatabase></UploadDatabase>
-    <tableFiles></tableFiles>
+    <!-- <UploadDatabase></UploadDatabase> -->
+    <!-- <tableFiles></tableFiles> -->
+    <tableBuefy></tableBuefy>
+   
   </div>
 </template>
 <script>
@@ -16,6 +19,8 @@ import ListFirebaseStorage from "../components/ListFirebaseStorage.vue";
 import ReadFilesDatabase from "../components/ReadFilesDatabase.vue";
 import UploadDatabase from "../components/UploadDatabase.vue";
 import tableFiles from "../components/TableFiles.vue";
+import tableBuefy from "../components/TableBuefy.vue";
+import tags from "../components/Tags.vue";
 import NavBar from "../components/NavBar.vue";
 import Header from "../components/Header.vue";
 import Search from "../components/Search.vue";
@@ -28,9 +33,11 @@ export default {
     ReadFilesDatabase,
     UploadDatabase,
     tableFiles,
+    tableBuefy,
     NavBar,
     Search,
-    Header
+    Header,
+    tags
   },
   data() {
     return {

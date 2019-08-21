@@ -1,75 +1,56 @@
 <template>
-    <div>
-        <b-navbar toggleable="lg" type="dark" variant="info">
-            <div>
-                <!-- MODAL START -->
+      <div class="container">
+        <nav class="navbar has-shadow " role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <!-- <nuxt-link to="/" class="navbar-item">
+          <img class="logo" src="/img/logo.png">
+        </nuxt-link> -->
 
-                <b-modal id="modal-1" title="Favorites">
-                    <p class="my-4">Hello from modall!</p>
-                    {{getFavorites.nombre}}
-                    <b-table striped hover :items="getFavorites">
-                            <template slot="UrlDownload" slot-scope="data">
-                                <audio controls>
-                                    <source :src="data.item.UrlDownload">  
-                                </audio>
+        <a href="/" class="navbar-item">
+            <h1>Samplers</h1>
+        </a>
 
-                                <!-- audio element -->
-                                <!-- <vue-plyr>
-                                <audio>
-                                    <source :src="data.item.UrlDownload" type="audio/mp3"/>
-                                </audio>
-                                </vue-plyr> -->
-                            </template>
-                    </b-table>
-                    
-                    <b-button variant="info">Download</b-button>
-                </b-modal>
-                <!-- Modal Finish -->
+        <a
+          role="button"
+          class="navbar-burger burger"
+          aria-label="menu"
+          aria-expanded="false"
+          @click="showMenu = !showMenu"
+          :class="{ 'is-active' : showMenu }"
+          data-target="customNVMenu"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="customNVMenu" class="navbar-menu" :class="{ 'is-active' : showMenu }">
+        <div class="navbar-end">
+          <nuxt-link to="/" class="navbar-item">Home</nuxt-link>
+          <nuxt-link to="/about" class="navbar-item">About</nuxt-link>         
+          <nuxt-link to="/login" class="navbar-item">Log In</nuxt-link>
+          <div class="navbar-item">
+            <div class="buttons">
+              <nuxt-link to="/register" class="button is-primary">Register</nuxt-link>
             </div>
-            <b-navbar-brand href="#">samplesDownload</b-navbar-brand>
-
-            <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-            <b-collapse id="nav-collapse" is-nav>
-            <b-navbar-nav>
-                
-                <b-button v-b-modal.modal-1 variant="warning">FAVORITES</b-button>
-                <b-nav-item href="#" disabled>Disabled</b-nav-item>
-            </b-navbar-nav>
-
-            <!-- Right aligned nav items -->
-            <b-navbar-nav class="ml-auto">
-                <!-- <b-nav-form>
-                    <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
-                    <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
-                </b-nav-form> -->
-
-                <b-nav-item-dropdown text="Lang" right>
-                <b-dropdown-item href="#">EN</b-dropdown-item>
-                <b-dropdown-item href="#">ES</b-dropdown-item>
-                <b-dropdown-item href="#">RU</b-dropdown-item>
-                <b-dropdown-item href="#">FA</b-dropdown-item>
-                </b-nav-item-dropdown>
-
-                <b-nav-item-dropdown right>
-                <!-- Using 'button-content' slot -->
-                <template slot="button-content"><em>User</em></template>
-                <b-dropdown-item href="#">Profile</b-dropdown-item>
-                <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-                </b-nav-item-dropdown>
-            </b-navbar-nav>
-            </b-collapse>
-        </b-navbar>
-        
+          </div>
+        </div>
+      </div>
     </div>
+  </nav>
+</div>
+     
 </template>
 <script>
 
 import { mapState, mapGetters, mapMutations } from "vuex";
 export default {
+    name:"Navbar",
      data() {
         return {
-
+            showMenu: false,
         }
     },
     computed:{

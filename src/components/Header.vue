@@ -1,8 +1,20 @@
 <template>
     <div>
-        <b-jumbotron header="BootstrapVue" lead="Bootstrap v4 Components for Vue.js 2">
-            <p>For more information visit website</p>
+        <!-- <b-jumbotron header="Samplers" lead="Upload and Download of Samplers for Music Production">
             <b-button variant="primary" href="#">More Info</b-button>
-        </b-jumbotron>
+        </b-jumbotron> -->
+
+        <section class="hero">
+            <div class="hero-body">
+                <div class="container">
+                <h1 class="title">
+                    Samplers
+                </h1>
+                <h2 class="subtitle">
+                    Upload and Download of Samplers for Music Production
+                </h2>
+                </div>
+            </div>
+        </section>
     </div>
 </template>
