@@ -1,6 +1,15 @@
 <template>
     <div>
         <!-- {{getSamples}} -->
+          <section class="hero">
+            <div class="hero-body">
+                <div class="container">
+                <h3 class="title">
+                    List Samples
+                </h3>
+                </div>
+            </div>
+        </section>
         <b-table :data="getSamples" >
             <template slot-scope="props">
                 

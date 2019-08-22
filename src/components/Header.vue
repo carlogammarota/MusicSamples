@@ -8,7 +8,7 @@
             <div class="hero-body">
                 <div class="container">
                 <h1 class="title">
-                    Samplers
+                    Samples
                 </h1>
                 <h2 class="subtitle">
                     Upload and Download of Samplers for Music Production
