@@ -1,18 +1,18 @@
 <template>
   <div>
-    <!-- <input type="file" @change="uploadFile($event)"> -->
-    <!-- {{getSamples}} -->
     <br>
-      {{CalcularPorcentajeDeCarga}}
+    <!-- <button @click="test()">teassdasdasd</button> -->
+    <div class="section" v-if="spinner">
+      <h2>Uploading {{CalcularPorcentajeDeCarga}}</h2>
+          <progress
+          class="progress"
+          :value="CalcularPorcentajeDeCarga"
+          max="100"
+          type="is-success"
+        >25%</progress>  
+    </div>
     <br>
     <b-spinner v-if="spinner" label="Loading..."></b-spinner>
-
-    <!-- <b-form-file
-      placeholder="Choose a file..."
-      drop-placeholder="Drop file here..."
-      @change="uploadFile($event)"
-      type="audio/mp3|wav|aiff"
-    ></b-form-file> -->
       <section>
         <b-field>
             <b-upload v-model="dropFiles"
@@ -31,51 +31,22 @@
                     </div>
                 </section>
             </b-upload>
-            
         </b-field>
-        <!-- <b-field class="file">
-            <b-upload v-model="dropFiles" >
-                <a class="button is-primary">
-                    <b-icon icon="upload"></b-icon>
-                    <span>Click to upload</span>
-                </a>
-            </b-upload>
-            <span class="file-name" v-if="file">
-                {{ file.name }}
-            </span>
-        </b-field> -->
-        <!-- <SelectTag></SelectTag> -->
-
-      
-
         <div class="columns is-mobile">
           <div class="column is-half is-offset-one-quarter">
              <!-- <b-field label="Expanded"> -->
              <b-field label="Expanded">
                 <b-select placeholder="Select Tag" required expanded v-model="selected">
-                    <option v-for="samples in getSamples" >{{samples.carpeta}}</option>
-                    <option value="silver">Silver</option>
+                    <option value="Kick">Kick</option>
+                    <option value="Hihat">Hi-Hat</option>
+                    <option v-for="samples in getSamples">{{samples}}</option>
+                    
                 </b-select>
             </b-field>
           </div>
         </div>
-
-
-
-
         <b-button @click="uploadFile()">Upload</b-button>
-<!-- 
-        <div class="tags">
-            <span v-for="(file, index) in dropFiles"
-                :key="index"
-                class="tag is-primary" >
-                {{file.name}}
-                <button class="delete is-small"
-                    type="button"
-                    @click="deleteDropFile(index)">
-                </button>
-            </span>
-        </div> -->
+
     </section>
   </div>
 </template>
@@ -84,10 +55,8 @@ import firebase from "firebase";
 //Componente que sube la imagen
 import { mapState, mapGetters, mapActions } from "vuex";
 import store from "@/store/index";
-import SelectTag from "./SelectTag";
 export default {
   components: {
-    SelectTag
   },
   data() {
     return {
@@ -100,13 +69,23 @@ export default {
       UrlDownload: "",
       dropFiles: [],
       isFullPage: true,
-      selected: ""
+      selected: "",
+
+      indeterminate: false,
+      type: null,
+      size: 'is-medium',
+      showValue: true,
+      format: 'raw',
+      precision: 2,
+      keepTrailingZeroes: false
     };
   },
   methods: {
+    test(){
+        // this.$buefy.notification.open('Something happened')
+    },     
     EscribirDatos() {
-      // this.Carpeta = this.Carpeta + "/" + this.NombreDelArchivo;
-      // console.log(this.Carpeta + "/" + this.NombreDelArchivo);
+     
       var ref = firebase
         .database()
         .ref(this.Carpeta + "/" + this.NombreDelArchivo.replace(".", ""));
@@ -114,7 +93,8 @@ export default {
         .update({
           nombre: this.NombreDelArchivo,
           carpeta: this.Carpeta,
-          UrlDownload: this.UrlDownload
+          UrlDownload: this.UrlDownload,
+          tag: this.selected
         })
         .then(function() {
           return ref.once("value");
@@ -129,15 +109,16 @@ export default {
     },
 
     uploadFile(event) {
-
+      this.NombreDelArchivo = this.dropFiles[0].name;
 
       console.log("selected", this.selected)
+
       // console.log("event", event[0])
-      this.Carpeta = this.selected
+      // this.Carpeta = this.selected
       console.log("event", this.dropFiles[0])
       // this.NombreDelArchivo = event.target.files[0].name;
-      this.NombreDelArchivo = this.dropFiles[0].name;
-      this.Archivo = this.Carpeta
+      
+      this.Archivo = this.dropFiles[0]
       var starsRef = firebase.storage().ref();
       var uploadTask = starsRef
         .child(this.Carpeta + "/" + this.NombreDelArchivo)
@@ -161,6 +142,8 @@ export default {
             console.log("sussess", sus);
             this.dropFiles = []
             this.spinner = false;
+
+            this.$buefy.notification.open('Something happened')
 
             uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
               this.UrlDownload = downloadURL;

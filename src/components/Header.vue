@@ -11,7 +11,7 @@
                     Samples
                 </h1>
                 <h2 class="subtitle">
-                    Upload and Download of Samplers for Music Production
+                    Upload and Download of Samples for Music Production
                 </h2>
                 </div>
             </div>

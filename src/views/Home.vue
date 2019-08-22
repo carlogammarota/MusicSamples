@@ -3,13 +3,14 @@
     <NavBar></NavBar>
     <Header></Header>
     <UploadDatabase></UploadDatabase>
-    <tags></tags>
+    
      
     <!-- <Search></Search> -->
     <!-- <ListFirebaseStorage></ListFirebaseStorage> -->
     <!-- <ReadFilesDatabase></ReadFilesDatabase> -->
     
     <!-- <tableFiles></tableFiles> -->
+    
     <tableBuefy></tableBuefy>
    
   </div>
@@ -21,7 +22,8 @@ import ReadFilesDatabase from "../components/ReadFilesDatabase.vue";
 import UploadDatabase from "../components/UploadDatabase.vue";
 import tableFiles from "../components/TableFiles.vue";
 import tableBuefy from "../components/TableBuefy.vue";
-import tags from "../components/Tags.vue";
+
+
 import NavBar from "../components/NavBar.vue";
 import Header from "../components/Header.vue";
 import Search from "../components/Search.vue";
@@ -38,7 +40,7 @@ export default {
     NavBar,
     Search,
     Header,
-    tags
+    
   },
   data() {
     return {

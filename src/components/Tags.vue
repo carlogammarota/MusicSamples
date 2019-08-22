@@ -1,10 +1,37 @@
 <template>
     <section class="section">
-        <div class="container is-widescreen">
-            <span class="tags tag is-dark"> tags </span>
+    <!-- GETALLSAMPLES{{getAllSamples}} -->
+        <div class="container is-widescreen" v-for="tag in getAllSamples" key="row">
+            <span class="tags tag is-dark" @click="clickTag(tag.tag)"> {{tag.tag}} </span>
+            <!-- {{getSamples}} -->
         </div>
-    </section >
+    </section>
 </template>
+
+<script>
+// import firebase from "firebase";
+//Componente que sube la imagen
+import { mapState, mapGetters, mapActions } from "vuex";
+// import store from "@/store/index";
+export default {
+  components: {
+    // SelectTag
+  },
+  methods: {
+      clickTag(event){
+          console.log("event", event)
+          this.$store.commit('database/setFilterTag', event)
+      }
+  },
+  computed: {
+     ...mapGetters({getAllSamples: "database/getAllSamples"})
+  },
+//   mounted(){
+//     this.$store.dispatch('database/getSamplesAction')
+//   },
+}
+</script>
+
 <style>
 .tags {
     cursor: pointer;

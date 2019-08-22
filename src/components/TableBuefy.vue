@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!-- {{getSamples}} -->
+        {{getSamples}}
           <section class="hero">
             <div class="hero-body">
                 <div class="container">
@@ -9,10 +9,13 @@
                 </h3>
                 </div>
             </div>
+            <tags></tags>
+            <InputSearch></InputSearch>
         </section>
         <b-table :data="getSamples" >
             <template slot-scope="props">
                 
+                <!-- {{props.row}} -->
                 
             <!-- <b-table-column label="Nombre" centered>
                 <span class="tag is-success">
@@ -22,10 +25,16 @@
 
             <b-table-column field="nombre" label="Name" centered>
                 {{props.row.nombre}}
+                <!-- <p v-for="songs in props.row">
+                  {{songs.nombre}}
+                </p> -->
             </b-table-column>
             <b-table-column field="folder" label="Folder" centered>
                 <span class="tag is-dark">
-                    {{props.row.carpeta}}
+                    {{props.row.tag}}
+                    <!-- <p v-for="songs in props.row">
+                      {{songs.carpeta}}
+                    </p> -->
                 </span>
             </b-table-column>
             <b-table-column field="play" label="Play" centered>
@@ -43,12 +52,18 @@
 </template>
 
 <script>
+import tags from "../components/Tags.vue";
 import firebase from "firebase";
 import { mapState, mapGetters, mapMutations } from "vuex";
+import InputSearch from "../components/InputSearch.vue";
 import store from "@/store/index";
 import JSZip from 'jszip' 
 import { saveAs } from 'file-saver';
     export default {
+      components: {
+        InputSearch,
+        tags
+      },
         data() {
             return {
                 
@@ -161,7 +176,7 @@ import { saveAs } from 'file-saver';
         
   },
   computed: {
-    ...mapGetters({getNombre: "database/getNombre", getSamples: "database/getSamples", getFavorites: "favorites/getFavorites"})
+    ...mapGetters({ getSamples: "database/getSamples"})
   }
 }
 </script>
