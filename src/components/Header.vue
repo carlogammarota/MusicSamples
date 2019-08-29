@@ -13,7 +13,7 @@
                 <h2 class="subtitle">
                     Upload and Download of Samples for Music Production
                 </h2>
-                <i class="fab fa-500px"></i>
+                <!-- <i class="fas fa-download" style="font-size:100px"></i> -->
                 </div>
             </div>
         </section>

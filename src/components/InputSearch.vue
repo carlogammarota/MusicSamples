@@ -24,6 +24,7 @@ import { mapState, mapGetters } from "vuex";
         },
         watch: {
             tags: function() {
+                console.log("cambio Tags")
                 this.$store.commit('database/setFilter', this.tags)
                
             }

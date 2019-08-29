@@ -5,6 +5,7 @@
             <span class="tags tag is-dark" @click="clickTag(tag.tag)"> {{tag.tag}} </span>
             <!-- {{getSamples}} -->
         </div>
+        {{getTags}}
     </section>
 </template>
 
@@ -20,11 +21,15 @@ export default {
   methods: {
       clickTag(event){
           console.log("event", event)
+        //   this.$store.dispatch('database/getSamplesAction')
           this.$store.commit('database/setFilterTag', event)
+          
       }
   },
   computed: {
-     ...mapGetters({getAllSamples: "database/getAllSamples"})
+     ...mapGetters({getAllSamples: "database/getAllSamples", getTags: "database/getTags"})
+     
+    // ...mapGetters({ getTags: "database/getTags"})
   },
 //   mounted(){
 //     this.$store.dispatch('database/getSamplesAction')

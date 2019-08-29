@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- {{getSamples}} -->
         {{getSamples}}
           <section class="hero">
             <div class="hero-body">
