@@ -35,7 +35,7 @@
         <div class="columns is-mobile">
           <div class="column is-half is-offset-one-quarter">
              <!-- <b-field label="Expanded"> -->
-             <b-field label="Expanded">
+             <b-field label="Select Tag">
                 <b-select placeholder="Select Tag" required expanded v-model="selected">
                     <option value="Kick">Kick</option>
                     <option value="Hihat">Hi-Hat</option>
@@ -43,11 +43,13 @@
                     
                 </b-select>
             </b-field>
+            <b-button class="is-half" style="margin:20px;" @click="uploadFile()">Upload</b-button>
           </div>
         </div>
-        <b-button @click="uploadFile()">Upload</b-button>
-
+          
+       
     </section>
+    
   </div>
 </template>
 <script>

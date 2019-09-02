@@ -3,7 +3,7 @@
         <!-- {{getSamples}} -->
 
         
-
+  
         <section class="hero is-warning">
           <div class="hero-body">
           
@@ -40,6 +40,7 @@
         </section>
         <tags></tags>
         <InputSearch></InputSearch>
+        <div class="container">
         <b-table 
           :data="getSamples" 
           :columns="columns"
@@ -77,6 +78,7 @@
 
             </template>
         </b-table>
+        </div>
         
 
 
