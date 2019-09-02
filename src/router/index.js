@@ -9,10 +9,10 @@ Vue.use(Router);
 let router = new Router({
   mode: "history",
   routes: [
-    {
-      path: "/",
-      redirect: "/home"
-    },
+    // {
+    //   path: "/",
+    //   redirect: "/home"
+    // },
     // {
     //   path: "/login",
     //   name: "login",
@@ -24,7 +24,7 @@ let router = new Router({
     //   component: SignUp
     // },
     {
-      path: "/home",
+      path: "/",
       name: "Home",
       component: Home
     }
