@@ -20,7 +20,6 @@ import firebase from "firebase";
 import ListFirebaseStorage from "../components/ListFirebaseStorage.vue";
 import ReadFilesDatabase from "../components/ReadFilesDatabase.vue";
 import UploadDatabase from "../components/UploadDatabase.vue";
-import tableFiles from "../components/TableFiles.vue";
 import tableBuefy from "../components/TableBuefy.vue";
 
 
@@ -35,7 +34,6 @@ export default {
     ListFirebaseStorage,
     ReadFilesDatabase,
     UploadDatabase,
-    tableFiles,
     tableBuefy,
     NavBar,
     Search,

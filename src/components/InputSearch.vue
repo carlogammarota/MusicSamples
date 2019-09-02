@@ -1,6 +1,7 @@
 <template>
     <section class="column is-half is-offset-one-quarter">
         <b-field label="Add some tags">
+            <!-- {{tags}} -->
             <b-taginput
                 v-model="tags"
                 ellipsis
@@ -19,7 +20,7 @@ import { mapState, mapGetters } from "vuex";
     export default {
         data() {
             return {
-                tags: []
+                tags: ["Kick", "Hihat", "Ride", "Snare", "Clap"]
             }
         },
         watch: {
@@ -31,6 +32,9 @@ import { mapState, mapGetters } from "vuex";
         },
          computed: {
             ...mapGetters({getAllSamples: "database/getSamples", getFilter: "database/getFilter"})
+        },
+        mounted() {
+            this.$store.commit('database/setFilter', this.tags)
         }
     }
 </script>

@@ -143,7 +143,7 @@ export default {
             this.dropFiles = []
             this.spinner = false;
 
-            this.$buefy.notification.open('Something happened')
+            // this.$buefy.notification.open('Something happened') 
 
             uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
               this.UrlDownload = downloadURL;

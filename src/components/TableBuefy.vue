@@ -13,7 +13,7 @@
             <tags></tags>
             <InputSearch></InputSearch>
         </section>
-        <b-table :data="getSamples" >
+        <b-table :data="getSamples">
             <template slot-scope="props">
                 
                 <!-- {{props.row}} -->
