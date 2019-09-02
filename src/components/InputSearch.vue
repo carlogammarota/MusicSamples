@@ -1,6 +1,6 @@
 <template>
     <section class="column is-half is-offset-one-quarter">
-        <b-field label="Add some tags">
+        <b-field label="search by Tag">
             <!-- {{tags}} -->
             <b-taginput
                 v-model="tags"

@@ -27,10 +27,8 @@ export default {
             return tags
         },
         getSamples(state){
-
                 //VERIFICAR ESTO
                 let newFilter = []
-                    // console.log("defined")
                     for (let index = 0; index < state.samples.length; index++) {
                         for (let indexTo = 0; indexTo < state.filter.length; indexTo++) {
                             if (state.samples[index].tag == state.filter[indexTo]) {
@@ -39,30 +37,19 @@ export default {
                         }
                     }
                     return newFilter
- 
-
         }
     },
     mutations: {
         setSamples (state, data) {
-            // state.samples.push(data)
             state.samples = data
             console.log("data", data)
         },
         setFilter(state, data){
-            //chekear esto!!!!
             state.filter = data
-            // state.filter.push(data)
-            // state.filter.push(data)
         },
 
-        //Getter de los tags individuales a seleccionar
         setFilterTag(state, data){
-            //chekear esto!!!!
-            
             state.filter.push(data)
-            // state.filter = data
-            // console.log("filterTag0", state.filter)
         }
     },
     actions: {

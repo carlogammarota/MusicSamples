@@ -1,11 +1,11 @@
 <template>
     <section class="section">
     <!-- GETALLSAMPLES{{getAllSamples}} -->
-        <div class="container is-widescreen" v-for="tag in getAllSamples" key="row">
+        <span class="container is-widescreen" v-for="tag in getAllSamples" key="row">
             <span class="tags tag is-dark" @click="clickTag(tag.tag)"> {{tag.tag}} </span>
             <!-- {{getSamples}} -->
-        </div>
-        {{getTags}}
+        </span>
+        <!-- {{getTags}} -->
     </section>
 </template>
 

@@ -1,58 +1,128 @@
 <template>
     <div>
-        <!-- {{getSamples}} -->
         {{getSamples}}
-          <section class="hero">
-            <div class="hero-body">
-                <div class="container">
-                <h3 class="title">
-                    List Samples
-                </h3>
-                </div>
-            </div>
-            <tags></tags>
-            <InputSearch></InputSearch>
-        </section>
-        <b-table :data="getSamples">
-            <template slot-scope="props">
-                
-                <!-- {{props.row}} -->
-                
-            <!-- <b-table-column label="Nombre" centered>
-                <span class="tag is-success">
-                    {{props}}
-                </span>
-            </b-table-column> -->
 
-            <b-table-column field="nombre" label="Name" centered>
+        
+
+        <section class="hero is-warning">
+          <div class="hero-body">
+          
+            <div class="container">
+            
+              <h1 class="title">
+                Favorites 
+              </h1>
+              <h2 class="subtitle">
+                download a zip with all your favorites
+              </h2>
+              <h4 v-for="song in checkedRows"> <i class="far fa-star"></i> <a :href="song.UrlDownload">    {{song.nombre}}</a> </h4>
+            </div>
+          </div>
+          <!-- {{checkedRows.length}} -->
+          <!-- <i class="fas fa-arrow-circle-down" style='font-size: 60px; padding: 0px 0px 40px 0px; max-width="140px"'></i><nuxt-link  style="margin: 10px;" class="button is-info">Descargar</nuxt-link> -->
+          <i v-if="checkedRows.length >= 1" class="fas fa-arrow-circle-down" id="DownloadSection" @click="downloadZip()"></i>
+
+        </section>
+
+        {{checkedRows}}
+        <section class="hero is-light">
+          <div class="hero-body">
+            <div class="container">
+              <h3 class="title">
+                List Samples
+              </h3>
+              <h2 class="subtitle">
+                list of all samples
+              </h2>
+              
+            </div>
+          </div>
+        </section>
+        <tags></tags>
+        <InputSearch></InputSearch>
+        <b-table 
+          :data="getSamples" 
+          :columns="columns"
+          :checked-rows.sync="checkedRows"
+          :is-row-checkable="(row) => row.id !== 3"
+          checkable
+          :checkbox-position="checkboxPosition"
+        > 
+            <template slot-scope="props">
+
+              <b-table-column field="nombre" label="Name" centered>
                 {{props.row.nombre}}
-                <!-- <p v-for="songs in props.row">
-                  {{songs.nombre}}
-                </p> -->
-            </b-table-column>
-            <b-table-column field="folder" label="Folder" centered>
+              </b-table-column>
+
+              <b-table-column field="folder" label="Folder" centered>
                 <span class="tag is-dark">
                     {{props.row.tag}}
-                    <!-- <p v-for="songs in props.row">
-                      {{songs.carpeta}}
-                    </p> -->
                 </span>
-            </b-table-column>
-            <b-table-column field="play" label="Play" centered>
-                <!-- {{props.row.UrlDownload}} -->
-                 <vue-plyr>
-                    <audio>
-                        <source :src="props.row.UrlDownload" type="audio/mp3"/>
-                    </audio>
-                </vue-plyr>
-            </b-table-column>
+              </b-table-column>
+
+              <b-table-column field="play" label="Play" centered>
+                <vue-plyr class="is-hidden-tablet">
+                  <audio>
+                    <source :src="props.row.UrlDownload" type="audio/mp3"/>
+                  </audio>
+                </vue-plyr> 
+
+                <audioPlayer class="is-hidden-mobile"  :file="props.row.UrlDownload"></audioPlayer>
+              </b-table-column>
+
+              <b-table-column field="action" label="Action" centered>
+                  <button style="margin: 10px;" class="button">Fav</button>
+                  <button style="margin: 10px;" class="button">Start</button>
+              </b-table-column>
 
             </template>
         </b-table>
+        
+
+
+        <!-- <section>
+          <b-field grouped group-multiline>
+              <button class="button field is-danger" @click="checkedRows = []"
+                  :disabled="!checkedRows.length">
+                  <b-icon icon="close"></b-icon>
+                  <span>Clear checked</span>
+              </button>
+              <b-select v-model="checkboxPosition">
+                  <option value="left">Checkbox at left</option>
+                  <option value="right">Checkbox at right</option>
+              </b-select>
+          </b-field>
+
+          <b-tabs>
+              <b-tab-item label="Table">
+                  <b-table
+                      :data="data"
+                      :columns="columns"
+                      :checked-rows.sync="checkedRows"
+                      :is-row-checkable="(row) => row.id !== 3"
+                      checkable
+                      :checkbox-position="checkboxPosition">
+
+                      <template slot="bottom-left">
+                          <b>Total checked</b>: {{ checkedRows.length }}
+                      </template>
+                  </b-table>
+              </b-tab-item>
+
+              <b-tab-item label="Checked rows">
+                  <pre>{{ checkedRows }}</pre>
+              </b-tab-item>
+          </b-tabs>
+      </section> -->
+
+
+
+
     </div>
 </template>
 
 <script>
+
 import tags from "../components/Tags.vue";
 import firebase from "firebase";
 import { mapState, mapGetters, mapMutations } from "vuex";
@@ -60,14 +130,26 @@ import InputSearch from "../components/InputSearch.vue";
 import store from "@/store/index";
 import JSZip from 'jszip' 
 import { saveAs } from 'file-saver';
+import audioPlayer from "../components/Player.vue"
     export default {
       components: {
         InputSearch,
-        tags
+        tags,
+        audioPlayer
       },
         data() {
+
             return {
-                
+                checkboxPosition: 'left',
+                checkedRows: [],
+                columns: [
+                    {
+                        field: 'id',
+                        label: 'ID',
+                        width: '40',
+                        numeric: true
+                    }
+                ]
             }
         },
     firebase() {
@@ -93,6 +175,58 @@ import { saveAs } from 'file-saver';
           autoHideDelay: 2000,
           appendToast: append
         })
+    },
+    downloadZip(){
+      console.log("downloadZIP", this.checkedRows)
+
+      // var new_zip = new JSZip();
+
+
+      // for (let index = 0; index < this.checkedRows.length; index++) {
+      //   // this.checkedRows[index];
+      //   new_zip.file(this.checkedRows[index].nombre, this.checkedRows[index].UrlDownload);
+      // }
+
+
+      // new_zip.generateAsync({type:"blob"})
+      // .then(function (blob) {
+      //     saveAs(blob, "samples.zip");
+      // });
+
+      // console.log("zip", new_zip)
+
+
+      var zip = new JSZip();
+      var count = 0;
+      var zipFilename = "zipFilename.zip";
+      var urls = [
+        'https://firebasestorage.googleapis.com/v0/b/samplesvuemusic.appspot.com/o/Musica%2FDose%20beats%20-%20La%20caldera.mp3?alt=media&token=bd8f0271-aa4d-4ee3-b749-ce7aaf3e33ea',
+        // 'http://image-url-2',
+        // 'http://image-url-3'
+      ];
+
+      urls.forEach(function(url){
+        var filename = "filename";
+        // loading a file and add it in a zip file
+        JSZipUtils.getBinaryContent(url, function (err, data) {
+          if(err) {
+              throw err; // or handle the error
+          }
+          zip.file(filename, data, {binary:true});
+          count++;
+          if (count == urls.length) {
+            var zipFile = zip.generateAsync({type: "blob"});
+            saveAs(zipFile, zipFilename);
+
+            // new_zip.generateAsync({type:"blob"})
+            // .then(function (blob) {
+            //     saveAs(blob, "samples.zip");
+            // });
+
+          }
+        });
+      });
+
     },
     addFavorites(obj){
       
@@ -181,3 +315,15 @@ import { saveAs } from 'file-saver';
   }
 }
 </script>
+
+<style>
+#DownloadSection{
+  font-size: 60px; padding: 0px 0px 40px 0px; max-width:"140px"; 
+  cursor: pointer;
+}
+#DownloadSection:hover {
+  font-size: 100px;
+  padding: 40px 0px 40px 0px;
+  
+}
+</style>
