@@ -30,7 +30,7 @@
     "router": "latest",
     "sass-loader": "^8.0.0",
     "serve": "^11.0.2",
-    "socket.io": "2.2.0",
+    "socket.io": "2.4.0",
     "vue": "^2.5.22",
     "vue-audio": "0.0.12",
     "vue-audio-visual": "^1.3.0",
